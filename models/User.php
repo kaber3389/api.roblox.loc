@@ -2,9 +2,19 @@
 
 namespace app\models;
 
-use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
+/**
+ * @property int id
+ * @property string email
+ * @property string full_name
+ * @property string role
+ * @property string password
+ * @property string created_at
+ * @property string updated_at
+ * @property boolean is_confirm_email
+ */
 class User extends ActiveRecord
 {
     public static function tableName()
@@ -20,6 +30,13 @@ class User extends ActiveRecord
             ['email', 'unique'],
             ['is_confirm_email', 'boolean'],
             ['role', 'string'],
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::class,
         ];
     }
 }
