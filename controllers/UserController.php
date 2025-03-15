@@ -16,15 +16,22 @@ class UserController extends AppController
     public function actionCreate()
     {
         if (!Yii::$app->request->isPost) {
-            throw new ForbiddenHttpException();
+            throw new ForbiddenHttpException('Only POST requests are allowed.');
         }
 
         $user = new User();
         $user->load(Yii::$app->request->post(), '');
 
-        if ($user->validate() && $user->save())
-            return [];
+        if ($user->validate() && $user->save()) {
+            return [
+                'status' => 'success',
+            ];
+        }
 
-        return $user->errors;
+        return [
+            'status' => 'error',
+            'message' => 'Validation failed',
+            'errors' => $user->errors,
+        ];
     }
 }
