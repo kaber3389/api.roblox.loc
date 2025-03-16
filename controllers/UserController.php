@@ -10,7 +10,7 @@ class UserController extends AppController
 {
     public function actionIndex()
     {
-        return User::find()->all();
+        return User::find()->addSelect(['email', 'full_name'])->all();
     }
 
     public function actionCreate()
