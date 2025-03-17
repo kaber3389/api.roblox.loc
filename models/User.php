@@ -30,7 +30,7 @@ class User extends ActiveRecord
             ['email', 'unique'],
             ['is_confirm_email', 'boolean'],
             ['role', 'string'],
-            ['password', 'string', 'length' => [4, 24]],
+            ['password', 'string', 'length' => [4, 28]],
         ];
     }
 

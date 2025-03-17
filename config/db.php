@@ -2,7 +2,7 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=roblox.loc',
+    'dsn' => 'mysql:host=yii2_db;dbname=roblox.loc',
     'username' => 'root',
     'password' => 'qwe123',
     'charset' => 'utf8mb4',
