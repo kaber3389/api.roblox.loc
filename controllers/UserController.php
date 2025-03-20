@@ -10,7 +10,7 @@ class UserController extends AppController
 {
     public function actionIndex()
     {
-        return User::find()->addSelect(['email', 'full_name'])->all();
+        return User::find()->addSelect(['email', 'username'])->all();
     }
 
     public function actionCreate()
@@ -18,9 +18,19 @@ class UserController extends AppController
         if (!Yii::$app->request->isPost) {
             throw new ForbiddenHttpException('Only POST requests are allowed.');
         }
+
         $user = new User();
-        $user->password = Yii::$app->request->post('password');
-        if (!$user->validate('password')) {
+        if ($user->load(Yii::$app->request->post(), '')) {
+            $user->setPasswordHash($user->password);
+            $user->generateAuthKey();
+
+            if ($user->validate() && $user->save()) {
+                return [
+                    'status' => 'success',
+                    'message' => 'User created successfully.',
+                ];
+            }
+
             return [
                 'status' => 'error',
                 'message' => 'Validation failed',
@@ -28,19 +38,9 @@ class UserController extends AppController
             ];
         }
 
-        $user->load(Yii::$app->request->post(), '');
-        $user->password = Yii::$app->security->generatePasswordHash($user->password);
-
-        if ($user->validate() && $user->save()) {
-            return [
-                'status' => 'success',
-            ];
-        }
-
         return [
             'status' => 'error',
-            'message' => 'Validation failed',
-            'errors' => $user->errors,
+            'message' => 'Failed to load data.',
         ];
     }
 }

@@ -7,25 +7,19 @@ class m250315_195910_user extends Migration
     /**
      * {@inheritdoc}
      */
-    public function safeUp()
+    public function up()
     {
-        $this->createTable('user', [
-            'id' => $this->primaryKey(), // Первичный ключ
-            'email' => $this->string()->notNull()->unique(), // Email, уникальный
-            'full_name' => $this->string()->notNull(), // Полное имя
-            'password' => $this->string()->notNull(), // Пароль
-            'is_confirm_email' => $this->boolean()->defaultValue(false), // Подтверждение email
-            'role' => $this->string()->notNull()->defaultValue('user'), // Роль пользователя
-            'created_at' => $this->integer()->notNull(), // Дата создания
-            'updated_at' => $this->integer()->notNull(), // Дата обновления
+        $this->createTable('{{%user}}', [
+            'id' => $this->primaryKey(),
+            'username' => $this->string()->notNull()->unique(),
+            'auth_key' => $this->string()->defaultValue(null),
+            'password_hash' => $this->string()->notNull(),
+            'password_reset_token' => $this->string()->unique(),
+            'email' => $this->string()->notNull()->unique(),
+            'status' => $this->smallInteger()->notNull()->defaultValue(10),
+            'created_at' => $this->integer()->notNull(),
+            'updated_at' => $this->integer()->notNull(),
         ]);
-
-        // Добавляем индекс для поля email (опционально)
-        $this->createIndex(
-            'idx-user-email',
-            'user',
-            'email'
-        );
     }
 
     /**
