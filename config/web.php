@@ -1,6 +1,5 @@
 <?php
 
-$params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
@@ -12,9 +11,18 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'as cors' => [
+            'class' => \yii\filters\Cors::class,
+            'cors' => [
+                'Origin' => [getenv('FRONTEND_HOST')],
+                'Access-Control-Allow-Methods' => ['GET', 'POST', 'OPTIONS'],
+                'Access-Control-Allow-Headers' => ['Content-Type', 'Authorization'],
+                'Access-Control-Allow-Credentials' => true,
+            ],
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'RNYyQxvUzozF7nz56RF52KVaYidx0vFL',
+            'cookieValidationKey' => getenv('COOKIE_VALIDATION_KEY'),
             'enableCsrfValidation' => false,
         ],
         'cache' => [
@@ -51,8 +59,7 @@ $config = [
             'rules' => [
             ],
         ],
-    ],
-    'params' => $params,
+    ]
 ];
 
 return $config;

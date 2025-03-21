@@ -1,19 +1,13 @@
 <?php
-
-function debug($data)
-{
-    print_r('<pre>');
-    print_r($data);
-    print_r('</pre>');
-}
-
 // comment out the following two lines when deployed to production
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_ENV') or define('YII_ENV', 'dev');
 
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
+require_once './functions.php';
 
+populateENV();
 $config = require __DIR__ . '/../config/web.php';
 
 (new yii\web\Application($config))->run();

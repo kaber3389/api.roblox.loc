@@ -1,10 +1,14 @@
 <?php
+$dbHost = getenv('DB_HOST');
+$dbName = getenv('DB_NAME');
+$dbUsername = getenv('DB_USER');
+$dbPassword = getenv('DB_PASSWORD');
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=yii2_db;dbname=roblox.loc',
-    'username' => 'root',
-    'password' => 'qwe123',
+    'dsn' => "mysql:host={$dbHost};dbname={$dbName}",
+    'username' => $dbUsername,
+    'password' => $dbPassword,
     'charset' => 'utf8mb4',
 
     // Schema cache options (for production environment)
