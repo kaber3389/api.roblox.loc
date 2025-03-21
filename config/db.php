@@ -1,8 +1,8 @@
 <?php
-$dbHost = getenv('DB_HOST');
-$dbName = getenv('DB_NAME');
-$dbUsername = getenv('DB_USER');
-$dbPassword = getenv('DB_PASSWORD');
+$dbHost = $_ENV['DB_HOST'];
+$dbName = $_ENV['DB_NAME'];
+$dbUsername = $_ENV['DB_USER'];
+$dbPassword = $_ENV['DB_PASSWORD'];
 
 return [
     'class' => 'yii\db\Connection',

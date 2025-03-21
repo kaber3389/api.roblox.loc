@@ -11,7 +11,7 @@ class JWTHelper
 
     public function __construct()
     {
-        $this->secretKey = getenv('JWT_SECRET');
+        $this->secretKey = $_ENV['JWT_SECRET'];
     }
 
     public function encode(User $user)

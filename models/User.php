@@ -138,7 +138,7 @@ class User extends ActiveRecord implements IdentityInterface
         }
 
         $timestamp = (int) substr($token, strrpos($token, '_') + 1);
-        $expire = getenv('USER_PASSWORD_RESET_TOKEN_EXPIRE');
+        $expire = $_ENV['USER_PASSWORD_RESET_TOKEN_EXPIRE'];
         return $timestamp + $expire >= time();
     }
 

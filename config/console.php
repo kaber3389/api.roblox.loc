@@ -1,4 +1,6 @@
 <?php
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->load();
 
 $db = require __DIR__ . '/db.php';
 

@@ -14,7 +14,7 @@ $config = [
         'as cors' => [
             'class' => \yii\filters\Cors::class,
             'cors' => [
-                'Origin' => [getenv('FRONTEND_HOST')],
+                'Origin' => [$_ENV['FRONTEND_HOST']],
                 'Access-Control-Allow-Methods' => ['GET', 'POST', 'OPTIONS'],
                 'Access-Control-Allow-Headers' => ['Content-Type', 'Authorization'],
                 'Access-Control-Allow-Credentials' => true,
@@ -22,7 +22,7 @@ $config = [
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => getenv('COOKIE_VALIDATION_KEY'),
+            'cookieValidationKey' => $_ENV['COOKIE_VALIDATION_KEY'],
             'enableCsrfValidation' => false,
         ],
         'cache' => [
@@ -46,7 +46,7 @@ $config = [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error', 'warning', 'trace', 'info'],
                     'logFile' => '@runtime/logs/app.log',
                     'logVars' => ['_GET', '_POST'],
                 ],

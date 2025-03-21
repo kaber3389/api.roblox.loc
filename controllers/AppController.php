@@ -34,7 +34,7 @@ class AppController extends Controller
             $apiKey = Yii::$app->request->post('apiKey');
         }
 
-        if (!$apiKey || $apiKey !== getenv('API_KEY')) {
+        if (!$apiKey || $apiKey !== $_ENV['API_KEY']) {
             throw new ForbiddenHttpException();
         }
 
